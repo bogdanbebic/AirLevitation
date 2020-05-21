@@ -28,6 +28,6 @@ void handle_button_decrease_event(void)
     const int min_reference = 0;
     if (is_auto && reference - decrement >= min_reference)
     {
-        reference -= decrement
+        reference -= decrement;
     }
 }
