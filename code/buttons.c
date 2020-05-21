@@ -31,3 +31,54 @@ void handle_button_decrease_event(void)
         reference -= decrement;
     }
 }
+
+static int button_auto_oldstate;
+static int button_manual_oldstate;
+static int button_increase_oldstate;
+static int button_decrease_oldstate;
+
+enum ButtonIndex { AUTO, MANUAL, INCREASE, DECREASE };
+
+void check_and_handle_button_auto_event(void)
+{
+    if (Button(&PORTB, AUTO, 1, 1))
+        button_auto_oldstate = 1;
+    if (button_auto_oldstate && Button(&PORTB, AUTO, 1, 0))
+    {
+        handle_button_auto_event();
+        button_auto_oldstate = 0;
+    }
+}
+
+void check_and_handle_button_manual_event(void)
+{
+    if (Button(&PORTB, MANUAL, 1, 1))
+        button_manual_oldstate = 1;
+    if (button_manual_oldstate && Button(&PORTB, MANUAL, 1, 0))
+    {
+        handle_button_auto_event();
+        button_manual_oldstate = 0;
+    }
+}
+
+void check_and_handle_button_increase_event(void)
+{
+    if (Button(&PORTB, INCREASE, 1, 1))
+        button_increase_oldstate = 1;
+    if (button_increase_oldstate && Button(&PORTB, INCREASE, 1, 0))
+    {
+        handle_button_auto_event();
+        button_increase_oldstate = 0;
+    }
+}
+
+void check_and_handle_button_decrease_event(void)
+{
+    if (Button(&PORTB, DECREASE, 1, 1))
+        button_decrease_oldstate = 1;
+    if (button_decrease_oldstate && Button(&PORTB, DECREASE, 1, 0))
+    {
+        handle_button_auto_event();
+        button_decrease_oldstate = 0;
+    }
+}
