@@ -11,6 +11,9 @@
  *  Ext. Modules:    D/A Converter
  */
 
+#include "buttons.h"
+#include "lcd.h"
+
 const char _CHIP_SELECT = 1;
 
 unsigned short int oldstate;
@@ -64,7 +67,7 @@ void DAC_Output(unsigned int valueDAC)
     PORTC |= _CHIP_SELECT; // SetBit(PORTC,CHIP_SELECT);
 }
 
-void main()
+void initialize()
 {
     // Inicijalizacija portova i periferija
     ADCON1 = 0x0F;            // Turn off A/D converters on PORTB
@@ -89,6 +92,11 @@ void main()
     Lcd_Init();
     Lcd_Cmd(_LCD_CLEAR);
     Lcd_Cmd(_LCD_CURSOR_OFF);
+}
+
+void main()
+{
+    /* old main
     dig1 = 5;
     cifra1 = dig1 + 48;     // Dodavanje ASCII koda (na 48 pocinju cifre)
     Lcd_Chr(2, 12, cifra1); // ispisivanje cifre1
@@ -109,4 +117,20 @@ void main()
     // AD i DA konverzija
     y_int = Adc_Read(3); // citanje sa AD konvertora, kanal 3 (vraca vrednost u opsegu 0-1023)
     DAC_Output(u_int);   // upis na DA konvertor (0-4095)
+    */
+
+    initialize();
+    while (1)
+    {
+        check_and_handle_button_auto_event();
+        check_and_handle_button_manual_event();
+        check_and_handle_button_increase_event();
+        check_and_handle_button_decrease_event();
+
+        // TODO: data acquisition
+        // TODO: lcd
+        // TODO: pid
+
+    }
+    
 }
