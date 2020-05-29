@@ -2,41 +2,43 @@
 #define SAMPLE_PERIOD 0.02
 
 // inputs
-int reference;
-int measurement;
+int reference = 0;
+int measurement = 0;
 
-static int filtered_reference;
-static int filtered_measurement;
+static int filtered_reference = 0;
+static int filtered_measurement = 0;
 
 // input
-int actuator_value;
-static int upper_limit;
-static int lower_limit;
+int actuator_value = 0;
+static int upper_limit = 1000;
+static int lower_limit = 0;
 
-const int kp;
+const double kp = 0.5;
 
-const int ki;
-const int ti;
+// const double ki;
+const double ti = 1;
 
 // input/output -> state
-int is_auto;
-static int is_auto_previous;
+int is_auto = 0;
+static int is_auto_previous = 0;
 
-static int error;
-static int error_previous;
+static int error = 0;
+static int error_previous = 0;
 
 // output
-int control_aggregated;
-static int control_proportional;
-static int control_integral;
-static int control_integral_previous;
+int control_aggregated = 0;
+static int control_proportional = 0;
+static int control_integral = 0;
+static int control_integral_previous = 0;
 
-static int stop_integral_control;
+static int stop_integral_control = 0;
 
 void pid()
 {
     // initialization when MAN -> AUTO transfer
-    if (!is_auto_previous) {
+    if (!is_auto_previous)
+    {
+        reference = measurement;
         filtered_reference = reference;
         filtered_measurement = measurement;
         error_previous = reference - measurement;
@@ -80,12 +82,16 @@ void pid()
         stop_integral_control = 1;
         control_integral_previous = control_integral;
     }
-    
+
     error_previous = error;
 
     if (!is_auto)
     {
         control_aggregated = actuator_value;
+    }
+    else
+    {
+        actuator_value = control_aggregated;
     }
 
     is_auto_previous = is_auto;
