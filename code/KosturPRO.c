@@ -17,13 +17,7 @@
 
 const char _CHIP_SELECT = 1;
 
-unsigned short int oldstate;
-float u, y;
-int y_int, u_int;
-char *text = "  TEMPERATURA";
 unsigned int timerTicks;
-int dig1;
-char cifra1;
 
 // Lcd pinout settings
 sbit LCD_RS at RD2_bit;
