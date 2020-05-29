@@ -1,5 +1,3 @@
-#include "lcd.h"
-
 int convert_percentage_to_actuator(int percentage);
 void DAC_Output(unsigned int valueDAC);
 
