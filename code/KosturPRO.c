@@ -110,13 +110,10 @@ void main()
     PIE1 = 1;        // TMR1IE: TMR1 Overflow Interrupt Enable bit, 1 = Enables
     INTCON = 0xC0;   // Interrupts enable
 
-    //  Odavde ide korisnicki kod
-
     // inicijalizacija i brisanje display-a
     Lcd_Init();
     Lcd_Cmd(_LCD_CLEAR);
     Lcd_Cmd(_LCD_CURSOR_OFF);
-    //DAC_Output(3500);
 
     while (1)
     {
@@ -141,27 +138,4 @@ void main()
             timer_flag = 0;
         }
     }
-    /*
-     dig1=5;
-     cifra1=dig1+48;                         // Dodavanje ASCII koda (na 48 pocinju cifre)
-     Lcd_Chr(2, 12, cifra1);                 // ispisivanje cifre1
-     Lcd_Chr(2, 13, '%');                    // ispisivanje procenta
-
-
-// citanje pina RB0 porta B
-
-     oldstate = 0;
-     if (Button(&PORTB, 0, 1, 1))                // detect logical one on RB0 pin
-      oldstate = 1;
-     if (oldstate && Button(&PORTB, 0, 1, 0))    // detect one-to-zero transition on RB0 pin
-      {
-      // Ovde idu komande koje se izvrsavaju ukoliko je pritisnut taster na pinu RB0
-
-      oldstate = 0;                              // Poslednja komanda koja se izvrsava ukoliko je pritisnut taster
-      }
-
-// AD i DA konverzija
-     y_int = Adc_Read(3);             // citanje sa AD konvertora, kanal 3 (vraca vrednost u opsegu 0-1023)
-     DAC_Output(u_int);               // upis na DA konvertor (0-4095)
-     */
 }
