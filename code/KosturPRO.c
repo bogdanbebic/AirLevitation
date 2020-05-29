@@ -14,6 +14,7 @@
 
 #include "buttons.h"
 #include "lcd.h"
+#include "pid_regulation.h"
 
 const char _CHIP_SELECT = 1;
 
@@ -76,13 +77,6 @@ int convert_percentage_to_actuator(int percentage)
     const int min_actuator = 3300, max_actuator = 4095;
     return min_actuator + (max_actuator - min_actuator) * (long)percentage / 1000L;
 }
-
-extern int is_auto;
-extern int reference;
-extern int control_aggregated;
-extern int measurement;
-extern int actuator_value;
-extern void pid();
 
 void main()
 {
