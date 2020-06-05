@@ -7,4 +7,4 @@ A simple air levitation process control program, done as a school project
 
 - `code/` - source code - possibly not tested
 
-- `Postavka vezbe - Levitaicija.pdf` - school assigment problem
+- `Postavka vezbe - Levitacija.pdf` - school assigment problem
